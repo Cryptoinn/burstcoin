@@ -256,7 +256,7 @@ function NxtAddress() {
 	} //__________________________
 
 	this.toString = function() {
-		var out = 'BURST-';
+		var out = 'ADHDD-';
 
 		for (var i = 0; i < 17; i++) {
 			out += alphabet[codeword[cwmap[i]]];
@@ -282,7 +282,7 @@ function NxtAddress() {
 				newlen = 0;
 
 			for (i = 0; i < len; i++) {
-				divide = divide * 32 + inp[i];
+				divide = divide * 27 + inp[12-i]; 
 
 				if (divide >= 10) {
 					inp[newlen++] = Math.floor(divide / 10);
