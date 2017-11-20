@@ -504,10 +504,10 @@ public final class BlockImpl implements Block {
     if(this.height == 0 || this.height >= 1944000) {
       return 0;
     }
-    int month = this.height / 10800;
-    long reward = BigInteger.valueOf(10000)
-        .multiply(BigInteger.valueOf(95).pow(month))
-        .divide(BigInteger.valueOf(100).pow(month)).longValue() * Constants.ONE_NXT;
+    int period = this.height /(10800 * 4 * 6); // period set to 6 months included 60 sec blocktime
+    long reward = BigInteger.valueOf(1000) // base block size set to 1000
+        .multiply(BigInteger.valueOf(75).pow(period)) // 75% decrease blocksize per period
+        .divide(BigInteger.valueOf(100).pow(period)).longValue() * Constants.ONE_NXT;
 
     return reward;
   }
@@ -549,7 +549,7 @@ public final class BlockImpl implements Block {
       long curBaseTarget = avgBaseTarget.longValue();
       long newBaseTarget = BigInteger.valueOf(curBaseTarget)
           .multiply(BigInteger.valueOf(difTime))
-          .divide(BigInteger.valueOf(240 * 4)).longValue();
+          .divide(BigInteger.valueOf(60 * 4)).longValue(); // modyfied block time to 60 sec
       if (newBaseTarget < 0 || newBaseTarget > Constants.MAX_BASE_TARGET) {
         newBaseTarget = Constants.MAX_BASE_TARGET;
       }
@@ -581,7 +581,7 @@ public final class BlockImpl implements Block {
             .divide(BigInteger.valueOf(blockCounter + 1));
       } while(blockCounter < 24);
       long difTime = this.timestamp - itBlock.getTimestamp();
-      long targetTimespan = 24 * 4 * 60;
+      long targetTimespan = 24 * 60; // changed to 60 sec
 
       if(difTime < targetTimespan /2) {
         difTime = targetTimespan /2;
@@ -604,13 +604,13 @@ public final class BlockImpl implements Block {
         newBaseTarget = 1;
       }
 
-      if(newBaseTarget < curBaseTarget * 8 / 10) {
-        newBaseTarget = curBaseTarget * 8 / 10;
-      }
+      if(newBaseTarget < curBaseTarget * 9 / 10) {
+        newBaseTarget = curBaseTarget * 9 / 10;
+      } // changed curve to be more smooth
 
-      if(newBaseTarget > curBaseTarget * 12 / 10) {
-        newBaseTarget = curBaseTarget * 12 / 10;
-      }
+      if(newBaseTarget > curBaseTarget * 11 / 10) {
+        newBaseTarget = curBaseTarget * 11 / 10;
+      } // changed curve to be more smooth
 
       baseTarget = newBaseTarget;
       cumulativeDifficulty = previousBlock.cumulativeDifficulty.add(Convert.two64.divide(BigInteger.valueOf(baseTarget)));
