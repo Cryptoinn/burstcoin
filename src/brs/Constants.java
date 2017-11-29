@@ -99,9 +99,9 @@ public final class Constants {
   public static final long EPOCH_BEGINNING;
   static {
     Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("UTC"));
-    calendar.set(Calendar.YEAR, 2014);
-    calendar.set(Calendar.MONTH, Calendar.AUGUST);
-    calendar.set(Calendar.DAY_OF_MONTH, 11);
+    calendar.set(Calendar.YEAR, 2017);
+    calendar.set(Calendar.MONTH, Calendar.NOVEMBER);
+    calendar.set(Calendar.DAY_OF_MONTH, 29);
     calendar.set(Calendar.HOUR_OF_DAY, 2);
     calendar.set(Calendar.MINUTE, 0);
     calendar.set(Calendar.SECOND, 0);
