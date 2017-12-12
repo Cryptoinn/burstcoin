@@ -5,7 +5,7 @@ body {
   font-family: sans-serif;
   -webkit-font-smoothing: antialiased;
   height:100%;
-  background: #f9f9f9;
+  background: #c7c7c7;
   color: black !important;
 }
 a {
@@ -16,7 +16,7 @@ a:active,
 a:focus {
   outline: none;
   text-decoration: none;
-  color: #72afd2;
+  color: #4f7a93;
 }
 /* Layouts */
 .wrapper {
